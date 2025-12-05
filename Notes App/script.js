@@ -1,9 +1,9 @@
-// ======= State =======
+
 const STORAGE_KEY = "notes_app_v1";
 let notes = [];
 let editingId = null;
 
-// ======= DOM Elements =======
+
 const noteForm = document.getElementById("noteForm");
 const titleInput = document.getElementById("titleInput");
 const contentInput = document.getElementById("contentInput");
@@ -16,7 +16,6 @@ const toast = document.getElementById("toast");
 const toastMessage = document.getElementById("toastMessage");
 const toastIcon = document.getElementById("toastIcon");
 
-// ======= Helpers =======
 function saveToStorage() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
 }
@@ -70,7 +69,7 @@ function updateCount() {
     count === 0 ? "No notes yet" : `${count} note${count > 1 ? "s" : ""}`;
 }
 
-// ======= Rendering =======
+
 function renderNotes(filterText = "") {
   notesGrid.innerHTML = "";
 
@@ -121,13 +120,13 @@ function renderNotes(filterText = "") {
                     </div>
                 `;
 
-      // Edit
+     
       card.querySelector(".edit").addEventListener("click", (e) => {
         e.stopPropagation();
         startEditing(note.id);
       });
 
-      // Delete
+      
       card.querySelector(".delete").addEventListener("click", (e) => {
         e.stopPropagation();
         deleteNote(note.id);
@@ -147,7 +146,7 @@ function escapeHtml(str) {
     .replace(/"/g, "&quot;");
 }
 
-// ======= CRUD Logic =======
+
 function addNote(title, content) {
   const now = Date.now();
   notes.push({
@@ -206,7 +205,6 @@ function resetForm() {
   submitBtnText.textContent = "Add Note";
 }
 
-// ======= Events =======
 noteForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const title = titleInput.value;
@@ -241,6 +239,5 @@ clearAllBtn.addEventListener("click", () => {
   showToast("All notes cleared", "delete");
 });
 
-// ======= Init =======
 loadFromStorage();
 renderNotes();
